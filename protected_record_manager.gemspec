@@ -18,5 +18,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 3.2.13"
   s.add_dependency "protected_record"
+  s.add_development_dependency "pry"
   # s.add_dependency "jquery-rails"
 end
