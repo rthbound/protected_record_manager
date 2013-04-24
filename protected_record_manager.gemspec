@@ -7,11 +7,11 @@ require "protected_record_manager/version"
 Gem::Specification.new do |s|
   s.name        = "protected_record_manager"
   s.version     = ProtectedRecordManager::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of ProtectedRecordManager."
-  s.description = "TODO: Description of ProtectedRecordManager."
+  s.authors     = ["Tad Hosford"]
+  s.email       = ["tad.hosford@gmail.com"]
+  s.homepage    = "http://github.com/rthbound/protected_record_manager"
+  s.summary     = "Installs the protected_record gem and provides an interface for triaging ChangeRequest records"
+  s.description = "Installs the protected_record gem and provides an interface for triaging ChangeRequest records"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
@@ -19,6 +19,4 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 3.2.13"
   s.add_dependency "protected_record"
   # s.add_dependency "jquery-rails"
-
-  s.add_development_dependency "activerecord-jdbcsqlite3-adapter"
 end

@@ -1,21 +1,26 @@
-<h1>Listing change_requests</h1>
+<h1>Listing Change Requests</h1>
 
 <table>
   <tr>
+    <th>User</th>
+    <th>Record Type</th>
+    <th>Record ID</th>
     <th>Changes</th>
+
     <th></th>
     <th></th>
   </tr>
 
 <% @change_requests.each do |change_request| %>
   <tr>
+    <td><%= change_request.user.email %></td>
+    <td><%= change_request.recordable_type %></td>
+    <td style="text-align:center;"><%= change_request.recordable_id %></td>
     <td><%= change_request.requested_changes %></td>
-    <td><%= link_to 'Show', change_request %></td>
+    <td><%= link_to 'Show', change_request_path(change_request) %></td>
     <td><%= link_to 'Edit', edit_change_request_path(change_request) %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Change request', new_change_request_path %>

@@ -1,4 +1,4 @@
-<%= form_for(@change_request) do |f| %>
+<%= form_for(@change_request, method: "PUT", url: change_request_path(@change_request)) do |f| %>
   <% if @change_request.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@change_request.errors.count, "error") %> prohibited this change_request from being saved:</h2>
@@ -9,9 +9,27 @@
       <% end %>
       </ul>
     </div>
+
+
   <% end %>
 
+  <strong>Apply changes and close request</strong>
+  <dl>
+
+  <dt> Record Type </dt>
+  <dd><%= @change_request.recordable_type %></dd>
+
+
+  <dt> Record ID </dt>
+  <dd><%= @change_request.recordable_id %></dd>
+
+
+  <dt> Changes </dt>
+  <dd><%= @change_request.requested_changes %></dd>
+
+  </dl>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Apply & Close" %>
   </div>
 <% end %>

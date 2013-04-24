@@ -1,6 +1,7 @@
 module ProtectedRecordManager
   class ApplicationController < ActionController::Base
     def ensure_record_manager
+      current_user || not_found
       current_user.protected_record_manager || not_found
     end
 

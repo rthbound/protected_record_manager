@@ -1,4 +1,18 @@
 <p id="notice"><%= notice %></p>
+<dl>
+
+<dt> Record Type </dt>
+<dd><%= @change_request.recordable_type %></dd>
+
+
+<dt> Record ID </dt>
+<dd><%= @change_request.recordable_id %></dd>
+
+
+<dt> Changes </dt>
+<dd><%= @change_request.requested_changes %></dd>
+
+</dl>
 
 
 <%= link_to 'Edit', edit_change_request_path(@change_request) %> |
