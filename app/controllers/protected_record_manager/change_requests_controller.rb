@@ -51,7 +51,6 @@ module ProtectedRecordManager
         @change_request.save
 
         # Make the change
-        binding.pry
         ProtectedRecord::UseCase::Update.new({
           params:           changes,
           user:             current_user,
