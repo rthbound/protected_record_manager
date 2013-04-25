@@ -6,7 +6,7 @@ This engine was created to provide the necessary migrations as well as a (very)
 basic interface for triaging `ProtectedRecord::ChangeRequest::Record` objects.
 You are free to use this gem without the engine, but you'll need to
 [grab these](https://github.com/rthbound/protected_record_manager/tree/master/db/migrate)
-and [this]((https://github.com/rthbound/protected_record) to get up and running.
+and [this](https://github.com/rthbound/protected_record) to get up and running.
 
 ### Routes and migrations
 
