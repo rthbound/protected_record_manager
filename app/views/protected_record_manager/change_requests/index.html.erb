@@ -2,10 +2,13 @@
 
 <table>
   <tr>
+    <th>Request</th>
     <th>User</th>
     <th>Record Type</th>
     <th>Record ID</th>
-    <th>Changes</th>
+    <th>Column</th>
+    <th>From</th>
+    <th>To</th>
 
     <th></th>
     <th></th>
@@ -13,12 +16,32 @@
 
 <% @change_requests.each do |change_request| %>
   <tr>
-    <td><%= change_request.user.email %></td>
-    <td><%= change_request.recordable_type %></td>
-    <td style="text-align:center;"><%= change_request.recordable_id %></td>
-    <td><%= change_request.requested_changes %></td>
-    <td><%= link_to 'Show', change_request_path(change_request) %></td>
-    <td><%= link_to 'Edit', edit_change_request_path(change_request) %></td>
+    <td rowspan=<%=change_count(change_request) %> class='centered'><%= change_request.id %>
+    <td rowspan=<%=change_count(change_request) %>><%= change_request.user.email %></td>
+    <td rowspan=<%=change_count(change_request) %>><%= change_request.recordable_type %></td>
+    <td rowspan=<%=change_count(change_request) %> class='centered'><%= change_request.recordable_id %></td>
+      <% requested_changes(change_request).each do |column, change| %>
+        <% if requested_changes(change_request).keys.first == column %>
+          <td><%= column %></td>
+            <% change.each do |point| %>
+              <td><%= point %></td>
+            <% end %>
+            <td rowspan=<%=change_count(change_request) %>>
+              <%= link_to 'Show', change_request_path(change_request) %>
+            </td>
+            <td rowspan=<%=change_count(change_request) %>>
+              <%= link_to 'Edit', edit_change_request_path(change_request) %>
+            </td>
+          </tr>
+        <% else %>
+          <tr>
+            <td><%= column %></td>
+            <% change.each do |point| %>
+              <td><%= point %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      <% end %>
   </tr>
 <% end %>
 </table>
