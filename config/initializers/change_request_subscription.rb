@@ -1,9 +1,11 @@
-ActiveSupport::Notifications.subscribe("protected_record_update") do |*args|
+ActiveSupport::Notifications.subscribe("protected_record_change_request") do |*args|
   event   = ActiveSupport::Notifications::Event.new(*args)
-  request = event.payload[:update_result].data[:updated].change_request_records.last
+  request = event.payload[:change_request]
 
-  event.payload[:listeners].each do |user|
-    ProtectedRecordManager::ChangeRequestMailer.notify(user, request).deliver
+  if request.present?
+    users = event.payload[:record_managers]
+
+    ProtectedRecordManager::ChangeRequestMailer.notify(users, request).deliver
   end
 end
 

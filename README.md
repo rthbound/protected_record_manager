@@ -44,13 +44,14 @@ $ rake db:migrate
 
 ### Events & Notifications
 
-I've added an [initializer](https://github.com/rthbound/protected_record_manager/blob/master/config/initializers/change_request_subscription.rb) which subscribes to instrumentations of the "protected_record_update" event. To fire the email, you will need to instrument the event yourself (example provided). The email will be sent to all users where `user.protected_record_manager #=> true`.
+I've added an [initializer](https://github.com/rthbound/protected_record_manager/blob/master/config/initializers/change_request_subscription.rb) which subscribes to instrumentations of the "protected_record_change_request" event.
+
+To fire the email, you will need to instrument the event yourself (example provided). If you fail to provide a change request object when you instrument the event, nothing will happen. The email will be sent to all users where `user.protected_record_manager #=> true`.
 
 ```ruby
-# NOTE: I only fire this if update_result.successful? #=> true
-ActiveSupport::Notifications.instrument("protected_record_update", {
-  update_result: update_result,
-  listeners: User.where(protected_record_manager: true)
+ActiveSupport::Notifications.instrument("protected_record_change_request", {
+  change_request: update_result.data[:change_request],
+  record_managers: User.where(protected_record_manager: true)
 })
 ```
 
