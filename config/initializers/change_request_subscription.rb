@@ -8,4 +8,3 @@ ActiveSupport::Notifications.subscribe("protected_record_change_request") do |*a
     ProtectedRecordManager::ChangeRequestMailer.notify(users, request).deliver
   end
 end
-
