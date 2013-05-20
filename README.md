@@ -42,6 +42,22 @@ $ rake protected_record_manager:install:migrations
 $ rake db:migrate
 ```
 
+### Events & Notifications
+
+I've added an [initializer](https://github.com/rthbound/protected_record_manager/blob/master/config/initializers/change_request_subscription.rb) which subscribes to instrumentations of the "protected_record_update" event. To fire the email, you will need to instrument the event yourself (example provided). The email will be sent to all users where `user.protected_record_manager #=> true`.
+
+```ruby
+# NOTE: I only fire this if update_result.successful? #=> true
+ActiveSupport::Notifications.instrument("protected_record_update", {
+  update_result: update_result,
+  listeners: User.where(protected_record_manager: true)
+})
+```
+
+To set the default from address, create in your rails app an initializer that does the following: `ProtectedRecordManager::Configuration.default_from = "foo@bar.com"`
+
+Unless you configure a default from address, this engine will use "no-reply@example.com"
+
 ## Contributing
 
 Please do. There's plenty that could be done to round out both the interface
